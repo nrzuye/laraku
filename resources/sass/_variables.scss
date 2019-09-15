@@ -18,10 +18,14 @@ $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $grey:#424b52;
+$soft-red:#f17a84;
 
 .text-red{
     color: $red;
 }
 .text-grey{
     color: $grey; 
+}
+.text-soft-red{
+    color: $soft-red; 
 }
