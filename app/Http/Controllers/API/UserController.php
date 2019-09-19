@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return User::first()-> paginate(10);
+        return User::latest()-> paginate(10);
     }
 
     /**
@@ -43,6 +43,7 @@ class UserController extends Controller
         return User::create([
             'name' => $request['name'],
             'email' => $request['email'],
+            'type' => $request['type'],
             'password' => hash::make($request['password']),
         ]);
     }

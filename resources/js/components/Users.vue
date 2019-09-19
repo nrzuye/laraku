@@ -18,14 +18,16 @@
                       <th>ID</th>
                       <th>Name</th>
                       <th>Email</th>
+                      <th>Type</th>
                       <th>Register</th>
                       <th>Modify</th>
                     </tr>
                   
-                    <tr v-for="user in users" :key="user.id">
+                    <tr v-for="user in users.data" :key="user.id">
                       <td>{{user.id}}</td>
                       <td>{{user.name|upText}}</td>
                       <td>{{user.email}}</td>
+                      <td>{{user.type}}</td>
                       <td>{{user.created_at| myDate}}</td>
                       <td>
                           <a href="#" @click="editModal(user)">
@@ -42,6 +44,11 @@
                 </table>
               </div>
               <!-- /.card-body -->
+              <div class="card-footer">
+                <pagination :data="users" 
+                @pagination-change-page="getResults"></pagination>
+
+              </div>
             </div>
             <!-- /.card -->
           </div>
@@ -72,6 +79,20 @@
                                 class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
                               <has-error :form="form" field="email"></has-error>
                           </div>
+
+                          <div class="form-group">
+                            <label>User Type</label>
+                            <select name="type" v-model="form.type" id="type"
+                            class="form-control" :class="{'isInvalid': form.errors.has('type')}">
+                              <option value="">Select User Role</option>
+                              <option value="admin">Admin</option>
+                              <option value="user">User</option>
+                              <option value="author">Author</option>
+                            </select>
+                            <has-error :form="form" field="type"></has-error>
+
+                          </div>
+
                           <div v-show="!editmode" class="form-group">
                               <input v-model="form.password" type="password" name="password"
                                 placeholder="Password"
@@ -102,12 +123,20 @@
                     id :'',
                     name :'',
                     email:'',
+                    type:'',
                     password:''
               })
             }
         },
 
         methods:{
+          getResults(page = 1) {
+            axios.get('api/user?page=' + page)
+              .then(response => {
+                this.users = response.data;
+              });
+          },
+
           newModal(){
             this.editmode = false;
             this.form.reset();
@@ -181,7 +210,7 @@
           },
 
           loadUsers(){
-            axios.get("api/user").then(({data}) => (this.users = data.data));
+            axios.get("api/user").then(({data}) => (this.users = data));
           },
 
           createUser()
