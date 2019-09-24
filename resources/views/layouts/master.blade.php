@@ -96,17 +96,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </p>
             </a>
             <ul class="nav nav-treeview">
+              @can('isAdmin')
               <li class="nav-item">
                 <router-link to="/users" class="nav-link">
                   <i class="nav-icon fas fa-circle"></i>
                   <p>Users</p>
                 </router-link>
               </li>
+              @endcan
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="nav-icon fas fa-circle"></i>
-                  <p>Inactive Page</p>
-                </a>
+                <router-link to="/customers" class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>Customers</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/productunit" class="nav-link">
+                  <i class="nav-icon fas fa-box"></i>
+                  <p>Satuan Product</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/pakets" class="nav-link">
+                  <i class="nav-icon fas fa-box"></i>
+                  <p>Paket</p>
+                </router-link>
               </li>
             </ul>
           </li>

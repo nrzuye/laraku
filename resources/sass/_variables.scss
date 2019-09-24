@@ -19,6 +19,7 @@ $teal: #4dc0b5;
 $cyan: #6cb2eb;
 $grey:#424b52;
 $soft-red:#f17a84;
+$white:#ffffff;
 
 .text-red{
     color: $red;
@@ -27,5 +28,8 @@ $soft-red:#f17a84;
     color: $grey; 
 }
 .text-soft-red{
+    color: $soft-red; 
+}
+.text-white{
     color: $soft-red; 
 }

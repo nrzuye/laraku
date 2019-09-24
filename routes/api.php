@@ -18,3 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources(['user' => 'API\userController']);
+
+// Route::middleware('auth:api')->get('/customer', function (Request $request) {
+//     return $request->customer();
+// });
+
+Route::apiResources(['customer' => 'API\CustomerController']);
+Route::apiResources(['productunit' => 'API\ProductUnitController']);
+Route::apiResources(['paket' => 'API\PaketController']);
+

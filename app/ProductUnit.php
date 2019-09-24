@@ -8,8 +8,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
 
-class Customer extends Model
+class ProductUnit extends Model
 {
+    protected $table = "productunits";
     use HasApiTokens, Notifiable;
 
     /**
@@ -18,7 +19,7 @@ class Customer extends Model
      * @var array
      */
     protected $fillable = [
-        'nik', 'name','gender', 'birth_place','birth','phone','alamat'
+         'id','name'
     ];
 
     /**

@@ -20,16 +20,16 @@
                       <th>Email</th>
                       <th>Type</th>
                       <th>Register</th>
-                      <th>Modify</th>
+                      <th>Option</th>
                     </tr>
                   
                     <tr v-for="user in users.data" :key="user.id">
                       <td>{{user.id}}</td>
                       <td>{{user.name|upText}}</td>
                       <td>{{user.email}}</td>
-                      <td>{{user.type}}</td>
+                      <td><span class="badge bg-primary">{{user.type}}</span></td>
                       <td>{{user.created_at| myDate}}</td>
-                      <td>
+                      <!-- <td>
                           <a href="#" @click="editModal(user)">
                               <i class="fa fa-edit text-grey"></i>
                           </a>
@@ -37,6 +37,13 @@
                           <a href="#" @click="deleteUsers(user.id)">
                               <i class="fa fa-trash text-soft-red"></i>
                           </a>
+                      </td> -->
+                      <td>
+                      <div class="btn-group">
+                        <button @click="editModal(user)" class="btn btn-info btn-sm fa fa-edit text-white"></button>
+                        <button class="btn btn-info btn-sm fa fa-eye text-white"></button>
+                        <button @click="deleteUsers(user.id)" class="btn btn-info btn-sm fa fa-trash text-white"></button>
+                      </div>
                       </td>
                     </tr>
 
@@ -90,7 +97,6 @@
                               <option value="author">Author</option>
                             </select>
                             <has-error :form="form" field="type"></has-error>
-
                           </div>
 
                           <div v-show="!editmode" class="form-group">
@@ -210,7 +216,9 @@
           },
 
           loadUsers(){
+            this.$Progress.start();
             axios.get("api/user").then(({data}) => (this.users = data));
+            this.$Progress.finish();
           },
 
           createUser()
